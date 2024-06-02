@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@500&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -73,5 +75,52 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+.menu-open {
+  > span {
+    position: absolute;
+    background-color: #0d0d0d;
+    height: 2px;
+    width: 50px;
+    transition: transform 0.3s ease-out,
+    opacity 0.1s ease-out;
+  }
+
+  > span:nth-of-type(1) {
+    transform: translateY(10px) rotate(135deg);
+  }
+
+  > span:nth-of-type(2) {
+    opacity: 0;
+  }
+
+  > span:nth-of-type(3) {
+    transform: translateY(10px) rotate(-135deg);
+  }
+}
+
+.menu-close {
+  > span {
+    position: absolute;
+    background-color: #0d0d0d;
+    height: 2px;
+    width: 50px;
+    transition: transform 0.3s ease-out,
+    opacity 0.1s ease-out;
+  }
+
+  > span:nth-of-type(1) {
+    transform: translateY(0px);
+  }
+
+  > span:nth-of-type(2) {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+
+  > span:nth-of-type(3) {
+    transform: translateY(20px);
   }
 }

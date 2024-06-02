@@ -1,8 +1,12 @@
+import Image from "next/image";
+import HomeImg from "@/image/home.jpg";
 
-export default function Home() {
+export default async function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-
-    </main>
+    <>
+      <div className="w-screen max-w-6xl mx-auto mt-5 md:mt-10">
+        <Image src={HomeImg} alt="Home page image" />
+      </div>
+    </>
   );
 }
