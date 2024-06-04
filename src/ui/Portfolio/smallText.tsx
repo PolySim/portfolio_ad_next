@@ -14,15 +14,5 @@ const SmallText = ({ text }: { text: string }) => {
     </div>
   );
 };
-/**
- * display: flex;
- *   flex-direction: column;
- *   justify-content: center;
- *   align-items: center;
- *   width: 100%;
- *   transition: transform 0.2s linear;
- *   position: relative;
- *   cursor: pointer;
- */
 
 export default SmallText;

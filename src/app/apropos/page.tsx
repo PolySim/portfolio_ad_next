@@ -14,7 +14,12 @@ export default async function AboutPage() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-16 w-full max-w-7xl mx-auto p-8 md:p-10">
       <div className="md:sticky top-6 w-full h-max">
-        <Image src={AboutImg} alt="Angeline Desdevises" />
+        <Image
+          src={AboutImg}
+          width={100}
+          height={100}
+          alt="Angeline Desdevises"
+        />
       </div>
       <div className="text-gray-600 font-helvetica">
         <h1 className="text-gray-900 text-4xl md:text-6xl font-bold">

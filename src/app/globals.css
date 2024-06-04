@@ -88,7 +88,7 @@
     background-color: #0d0d0d;
     height: 2px;
     width: 50px;
-    transition: transform 0.3s ease-out,
+    transition: transform 0.2s ease-out,
     opacity 0.1s ease-out;
   }
 
@@ -111,7 +111,7 @@
     background-color: #0d0d0d;
     height: 2px;
     width: 50px;
-    transition: transform 0.3s ease-out,
+    transition: transform 0.2s ease-out,
     opacity 0.1s ease-out;
   }
 
@@ -127,4 +127,12 @@
   > span:nth-of-type(3) {
     transform: translateY(20px);
   }
+}
+
+.disable_scrollbar {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
 }

@@ -12,7 +12,7 @@ const BurgerMenu = ({
   return (
     <div
       className={cn(
-        "flex flex-col justify-center items-center gap-10 absolute top-0 left-0 right-0 bottom-0 transition-transform duration-300 bg-white font-bold font-helvetica text-md text-center",
+        "flex flex-col justify-center items-center gap-10 absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden transition-transform duration-300 bg-white font-bold font-helvetica text-md text-center z-20",
         {
           "-translate-x-full": !isOpen,
         },
