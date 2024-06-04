@@ -5,7 +5,7 @@ import { PropsWithChildren } from "react";
 import Footer from "@/ui/Footer/Footer";
 
 export const metadata: Metadata = {
-  title: "Angeline Desdevises - Home",
+  title: "Angeline Desdevises",
   description:
     "Voici le portfolio de la photographe Angeline Desdevises. Retrouvez ses nombreux clichées et également ses articles.",
 };
