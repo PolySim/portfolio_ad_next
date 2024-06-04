@@ -7,18 +7,23 @@ import { useRouter } from "next/navigation";
 import QuitFullPage from "@/ui/Portfolio/Fullpage/QuitFullPage";
 
 const FullPageContainer = ({
-  imageClick,
+  searchParams,
   children,
 }: PropsWithChildren<{
-  imageClick: string;
+  searchParams: { open: string; imageClick: string };
 }>) => {
   const handleScroll = useFullPageStore((state) => state.handleScroll);
   const containerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   useEffect(() => {
-    handleScroll(containerRef, true, parseInt(imageClick));
+    handleScroll(containerRef, true, parseInt(searchParams.imageClick));
   });
+
+  useEffect(() => {
+    document.body.style.overflow =
+      searchParams.open === "true" ? "hidden" : "auto";
+  }, [searchParams.open]);
 
   useEffect(() => {
     const keyDown = (e: KeyboardEvent) => {
@@ -40,14 +45,21 @@ const FullPageContainer = ({
   }, []);
 
   return (
-    <FullPageInitializer currentIndex={imageClick} containerRef={containerRef}>
-      <QuitFullPage />
-      <div
-        className="flex scroll-smooth snap-mandatory snap-x fixed top-0 left-0 h-screen w-screen overflow-x-scroll bg-white z-40 disable_scrollbar"
-        ref={containerRef}
-      >
-        {children}
-      </div>
+    <FullPageInitializer
+      currentIndex={searchParams.imageClick}
+      containerRef={containerRef}
+    >
+      {searchParams.open === "true" && (
+        <>
+          <QuitFullPage />
+          <div
+            className="flex scroll-smooth snap-mandatory snap-x fixed top-0 left-0 h-screen w-screen overflow-x-scroll bg-white z-40 disable_scrollbar"
+            ref={containerRef}
+          >
+            {children}
+          </div>
+        </>
+      )}
     </FullPageInitializer>
   );
 };
