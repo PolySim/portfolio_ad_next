@@ -19,9 +19,14 @@ const getPageInformation = async (pageId: string) => {
 
 const getImages = async (pageId: string) => {
   "use server";
-  return await fetch(`${process.env.API_URL}/api/images?num=${pageId}`, {
-    method: "GET",
-  }).then((res) => res.json() as Promise<ImageType[]>);
+  try {
+    return await fetch(`${process.env.API_URL}/api/images?num=${pageId}`, {
+      method: "GET",
+    }).then((res) => res.json() as Promise<ImageType[]>);
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
 };
 
 export default async function ImagesPage({

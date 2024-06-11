@@ -4,9 +4,14 @@ import AboutImg from "@/image/about.jpeg";
 
 const getBiography = async () => {
   "use server";
-  return await fetch(`${process.env.API_URL}/api/about`, {
-    method: "GET",
-  }).then((res) => res.json() as Promise<AboutType>);
+  try {
+    return await fetch(`${process.env.API_URL}/api/about`, {
+      method: "GET",
+    }).then((res) => res.json() as Promise<AboutType>);
+  } catch (e) {
+    console.log(e);
+    return { fr: "", en: "" };
+  }
 };
 
 export default async function AboutPage() {
