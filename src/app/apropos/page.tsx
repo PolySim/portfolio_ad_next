@@ -21,9 +21,10 @@ export default async function AboutPage() {
       <div className="md:sticky top-6 w-full h-max">
         <Image
           src={AboutImg}
-          width={100}
-          height={100}
+          width={568}
+          height={852}
           alt="Angeline Desdevises"
+          className="w-full"
         />
       </div>
       <div className="text-gray-600 font-helvetica">
