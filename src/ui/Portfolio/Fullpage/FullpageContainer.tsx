@@ -42,7 +42,7 @@ const FullPageContainer = ({
 
     window.addEventListener("keydown", keyDown);
     return () => window.removeEventListener("keydown", keyDown);
-  }, []);
+  });
 
   return (
     <FullPageInitializer
