@@ -4,6 +4,7 @@ import Header from "@/ui/Header/Header";
 import { PropsWithChildren } from "react";
 import Footer from "@/ui/Footer/Footer";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Angeline Desdevises",
@@ -21,6 +22,7 @@ export default async function RootLayout({
           <Header />
           {children}
           <Footer />
+          <Toaster />
         </body>
       </UserProvider>
     </html>

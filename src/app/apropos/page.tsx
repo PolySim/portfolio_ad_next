@@ -7,6 +7,7 @@ const getBiography = async () => {
   try {
     return await fetch(`${process.env.API_URL}/api/about`, {
       method: "GET",
+      next: { tags: ["about"] },
     }).then((res) => res.json() as Promise<AboutType>);
   } catch (e) {
     console.log(e);
