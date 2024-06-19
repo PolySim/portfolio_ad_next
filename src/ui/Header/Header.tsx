@@ -9,6 +9,7 @@ async function getReports() {
   try {
     return await fetch(`${process.env.API_URL}/api/pages`, {
       method: "GET",
+      next: { tags: ["reports"] },
     }).then((res) => res.json() as Promise<ReportType[]>);
   } catch (e) {
     console.log(e);

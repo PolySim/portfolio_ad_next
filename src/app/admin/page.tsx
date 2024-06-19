@@ -7,6 +7,7 @@ async function getPages() {
   try {
     const reports = await fetch(`${process.env.API_URL}/api/pages`, {
       method: "GET",
+      next: { tags: ["reports"] },
     }).then((res) => res.json() as Promise<ReportType[]>);
     return [
       ...reports,
@@ -29,7 +30,7 @@ export default withPageAuthRequired(
 
     return (
       <main>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
           {pages.map((page) => (
             <Link
               href={
