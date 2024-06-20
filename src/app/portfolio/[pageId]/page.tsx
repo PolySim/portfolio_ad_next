@@ -22,6 +22,7 @@ const getImages = async (pageId: string) => {
   try {
     return await fetch(`${process.env.API_URL}/api/images?num=${pageId}`, {
       method: "GET",
+      next: { tags: [`images_${pageId}`] },
     }).then((res) => res.json() as Promise<ImageType[]>);
   } catch (e) {
     console.log(e);
