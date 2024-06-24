@@ -22,7 +22,7 @@ const SmallImage = async ({
       className={`${height > width ? "row-span-2" : "row-span-1"} group hover:scale-95 transition relative w-full`}
     >
       <Image
-        src={`${process.env.API_URL}/image/${image.id}`}
+        src={`${process.env.API_URL}/api/images/${image.id}`}
         alt={`image_${image.id}`}
         width={width}
         height={height > width ? 3 * width : 1.5 * width}

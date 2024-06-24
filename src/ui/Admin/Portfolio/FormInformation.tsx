@@ -21,14 +21,12 @@ export default function FormInformation({
 
   const onSubmit = debounce(async (data: Omit<ReportType, "index">) => {
     const values: ReportType = form.getValues();
-    console.log("values", values, data, information);
     if (
       values.title === data.title &&
       values.article === data.article &&
       (values.title !== information.title ||
         values.article !== information.article)
     ) {
-      console.log("No changes");
       await updateReportInformation(pageId, data).then((res) =>
         res === 200
           ? toast({
@@ -50,7 +48,7 @@ export default function FormInformation({
 
   return (
     <form
-      className="grid grid-cols-1 md:grid-cols-2 gap-6 px-10 mt-10"
+      className="grid grid-cols-1 md:grid-cols-2 gap-6 px-10"
       onSubmit={form.handleSubmit(onSubmit)}
     >
       <div>

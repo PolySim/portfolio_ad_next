@@ -11,7 +11,7 @@ const FullImage = async ({ image }: { image: ImageType }) => {
     <div className="h-screen w-screen snap-center min-w-screen">
       <Image
         className="object-contain h-full w-full"
-        src={`${process.env.API_URL}/image/${image.id}`}
+        src={`${process.env.API_URL}/api/images/${image.id}`}
         alt={`image${image.id}`}
         width={width}
         height={height}
