@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -110,9 +111,11 @@ export default function ImageSorted({
               <Button variant="destructive" onClick={onDelete}>
                 Supprimer l'image
               </Button>
-              <Button type="submit" onClick={onSubmit}>
-                Save changes
-              </Button>
+              <DialogClose>
+                <Button type="submit" onClick={onSubmit}>
+                  Save changes
+                </Button>
+              </DialogClose>
             </DialogFooter>
           </DialogContent>
         </Dialog>

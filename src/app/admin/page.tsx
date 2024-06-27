@@ -2,7 +2,10 @@ import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { ReportType } from "@/model/reportModel";
 import Link from "next/link";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import AddReportModal from "@/ui/Admin/AddReport/AddReportModal";
+import AddReportModal from "@/ui/Admin/Home/AddReportModal";
+import { SquareArrowOutUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import DeleteReport from "@/ui/Admin/Home/DeleteReport";
 
 async function getPages() {
   "use server";
@@ -32,7 +35,7 @@ export default withPageAuthRequired(
 
     return (
       <main>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6">
           {pages.map((page) =>
             page.index === 0 ? (
               <Dialog key={page.title}>
@@ -46,19 +49,30 @@ export default withPageAuthRequired(
                 <AddReportModal />
               </Dialog>
             ) : (
-              <Link
-                href={
-                  page.index === undefined
-                    ? `/admin/${page.title}`
-                    : `/admin/portfolio/${page.index}`
-                }
+              <div
                 key={page.title}
-                className="rounded-lg shadow p-6 group hover:bg-customblue-300 transition"
+                className="flex justify-between gap-4 rounded-lg shadow p-6 group hover:bg-customblue-300 transition"
               >
                 <h2 className="text-2xl font-helvetica group-hover:text-white transition">
                   {page.title}
                 </h2>
-              </Link>
+                <div className="flex gap-4">
+                  <Button asChild variant="default">
+                    <Link
+                      href={
+                        page.index === undefined
+                          ? `/admin/${page.title}`
+                          : `/admin/portfolio/${page.index}`
+                      }
+                    >
+                      <SquareArrowOutUpRight />
+                    </Link>
+                  </Button>
+                  {page.index && page.index > 3 && (
+                    <DeleteReport id={page.index} />
+                  )}
+                </div>
+              </div>
             ),
           )}
         </div>

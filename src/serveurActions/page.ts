@@ -31,3 +31,14 @@ export const createReport = async ({
       redirect(`/admin/portfolio/${data.index}`, RedirectType.push);
     });
 };
+
+export const deleteReport = async (pageId: number) => {
+  await fetch(`${process.env.API_URL}/api/pages/${pageId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then(() => {
+    revalidateTag("reports");
+  });
+};
