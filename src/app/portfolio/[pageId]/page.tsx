@@ -30,6 +30,22 @@ const getImages = async (pageId: string) => {
   }
 };
 
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { pageId: string };
+}) => {
+  const information = await getPageInformation(params.pageId);
+  return information.article
+    ? {
+        title: information.title || "Report",
+        description: information.article,
+      }
+    : {
+        title: information.title || "Report",
+      };
+};
+
 export default async function ImagesPage({
   params,
   searchParams,

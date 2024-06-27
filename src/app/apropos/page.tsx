@@ -15,6 +15,10 @@ const getBiography = async () => {
   }
 };
 
+export const metadata = {
+  title: "A propos",
+};
+
 export default async function AboutPage() {
   const biography = await getBiography();
   return (

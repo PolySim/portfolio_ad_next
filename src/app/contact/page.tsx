@@ -2,6 +2,10 @@ import Image from "next/image";
 import ContactImg from "@/image/contact.jpg";
 import ContactForm from "@/ui/Contact/ContactForm";
 
+export const metadata = {
+  title: "Contact",
+};
+
 export default function AboutPage() {
   return (
     <main className="w-screen flex items-center flex-col">
