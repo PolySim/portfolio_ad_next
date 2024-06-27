@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { updateImageDescriptionAction } from "@/ui/Admin/Portfolio/updateImageDescriptionAction";
 import { deleteImage } from "@/serveurActions/images";
+import Image from "next/image";
 
 export default function ImageSorted({
   image,
@@ -84,7 +85,7 @@ export default function ImageSorted({
         "row-span-2": ratio === 2,
       })}
     >
-      <img
+      <Image
         src={`${process.env.NEXT_PUBLIC_API_URL}/api/images/${image.id}`}
         alt={`image_${image.id}`}
         ref={imageRef}
@@ -109,7 +110,7 @@ export default function ImageSorted({
             </div>
             <DialogFooter>
               <Button variant="destructive" onClick={onDelete}>
-                Supprimer l'image
+                Supprimer l&apos;image
               </Button>
               <DialogClose>
                 <Button type="submit" onClick={onSubmit}>

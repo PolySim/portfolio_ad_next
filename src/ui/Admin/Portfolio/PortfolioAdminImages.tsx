@@ -33,7 +33,7 @@ export default function PortfolioAdminImages({
 
   useEffect(() => {
     setImages(images);
-  }, [images]);
+  }, [images, setImages]);
 
   const onSubmit = debounce(async (lastImagesSorted: ImageType[]) => {
     if (!arrayIsEqual(lastImagesSorted, imagesSorted)) return;

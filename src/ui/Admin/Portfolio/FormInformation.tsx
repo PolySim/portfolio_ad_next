@@ -44,7 +44,7 @@ export default function FormInformation({
 
   useEffect(() => {
     onSubmit({ title: infoWatch[0], article: infoWatch[1] });
-  }, [infoWatch]);
+  }, [infoWatch, onSubmit]);
 
   return (
     <form
