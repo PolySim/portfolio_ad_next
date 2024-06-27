@@ -1,7 +1,7 @@
-import probe from "probe-image-size";
 import { ImageType } from "@/app/portfolio/[pageId]/page";
 import Link from "next/link";
 import Image from "next/image";
+import probe from "probe-image-size";
 
 const SmallImage = async ({
   image,
@@ -12,9 +12,18 @@ const SmallImage = async ({
   pageId: string;
   index: number;
 }) => {
-  const { width, height } = await probe(
-    `${process.env.API_URL}/image/${image.id}`,
-  );
+  const ImageSrc = await fetch(
+    `${process.env.API_URL}/api/images/${image.id}`,
+  ).then((res) => res.blob());
+  let height = 300;
+  let width = 400;
+  if (ImageSrc.type.startsWith("image")) {
+    const { width: widthResult, height: heightResult } = await probe(
+      `${process.env.API_URL}/api/images/${image.id}`,
+    );
+    height = heightResult;
+    width = widthResult;
+  }
 
   return (
     <Link

@@ -1,6 +1,8 @@
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { ReportType } from "@/model/reportModel";
 import Link from "next/link";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import AddReportModal from "@/ui/Admin/AddReport/AddReportModal";
 
 async function getPages() {
   "use server";
@@ -31,21 +33,34 @@ export default withPageAuthRequired(
     return (
       <main>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-          {pages.map((page) => (
-            <Link
-              href={
-                page.index === undefined
-                  ? `/admin/${page.title}`
-                  : `/admin/portfolio/${page.index}`
-              }
-              key={page.title}
-              className="rounded-lg shadow p-6 group hover:bg-customblue-300 transition"
-            >
-              <h2 className="text-2xl font-helvetica group-hover:text-white transition">
-                {page.title}
-              </h2>
-            </Link>
-          ))}
+          {pages.map((page) =>
+            page.index === 0 ? (
+              <Dialog key={page.title}>
+                <DialogTrigger asChild>
+                  <div className="rounded-lg shadow p-6 group hover:bg-customblue-300 transition cursor-pointer">
+                    <h2 className="text-2xl font-helvetica group-hover:text-white transition">
+                      {page.title}
+                    </h2>
+                  </div>
+                </DialogTrigger>
+                <AddReportModal />
+              </Dialog>
+            ) : (
+              <Link
+                href={
+                  page.index === undefined
+                    ? `/admin/${page.title}`
+                    : `/admin/portfolio/${page.index}`
+                }
+                key={page.title}
+                className="rounded-lg shadow p-6 group hover:bg-customblue-300 transition"
+              >
+                <h2 className="text-2xl font-helvetica group-hover:text-white transition">
+                  {page.title}
+                </h2>
+              </Link>
+            ),
+          )}
         </div>
       </main>
     );
