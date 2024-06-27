@@ -18,7 +18,7 @@ const getBiography = async () => {
 export default async function AboutPage() {
   const biography = await getBiography();
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-16 w-full max-w-7xl mx-auto p-8 md:p-10">
+    <div className="relative grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-16 w-full max-w-7xl mx-auto p-8 md:p-10">
       <div className="md:sticky top-6 w-full h-max">
         <Image
           src={AboutImg}

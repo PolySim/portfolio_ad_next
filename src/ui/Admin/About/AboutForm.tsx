@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { AboutType } from "@/model/aboutModel";
 import { submitAboutAction } from "@/ui/Admin/About/SubmitAboutAction";
 import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
 
 export default function AdminAboutForm({
   biography,
@@ -54,16 +55,18 @@ export default function AdminAboutForm({
       />
       <div className="flex gap-3">
         <Input
-          type="submit"
-          value="Valider"
-          className="hover:bg-customblue-300 hover:text-white transition cursor-pointer"
-        />
-        <Input
           onClick={onReset}
           type="button"
           value="Annuler"
           className="cursor-pointer"
         />
+        <Button asChild>
+          <Input
+            type="submit"
+            value="Valider"
+            className="hover:bg-customblue-300 hover:text-white transition cursor-pointer"
+          />
+        </Button>
       </div>
     </form>
   );
