@@ -34,13 +34,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     })),
     {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/apropos`,
+      url: `${process.env.APP_URL}/apropos`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/contact`,
+      url: `${process.env.APP_URL}/contact`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
