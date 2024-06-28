@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const pages = await getPages();
   return [
     {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/`,
+      url: `${process.env.APP_URL}/`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 1,
