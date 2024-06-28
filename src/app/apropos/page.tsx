@@ -7,6 +7,7 @@ const getBiography = async () => {
   try {
     return await fetch(`${process.env.API_URL}/api/about`, {
       method: "GET",
+      next: { tags: ["about"] },
     }).then((res) => res.json() as Promise<AboutType>);
   } catch (e) {
     console.log(e);
@@ -14,10 +15,14 @@ const getBiography = async () => {
   }
 };
 
+export const metadata = {
+  title: "A propos",
+};
+
 export default async function AboutPage() {
   const biography = await getBiography();
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-16 w-full max-w-7xl mx-auto p-8 md:p-10">
+    <div className="relative grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-16 w-full max-w-7xl mx-auto p-8 md:p-10">
       <div className="md:sticky top-6 w-full h-max">
         <Image
           src={AboutImg}

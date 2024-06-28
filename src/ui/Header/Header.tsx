@@ -6,9 +6,15 @@ import SocialNetwork from "@/ui/SocialNetwork/SocialNetwork";
 
 async function getReports() {
   "use server";
-  return await fetch(`${process.env.API_URL}/api/pages`, {
-    method: "GET",
-  }).then((res) => res.json() as Promise<ReportType[]>);
+  try {
+    return await fetch(`${process.env.API_URL}/api/pages`, {
+      method: "GET",
+      next: { tags: ["reports"] },
+    }).then((res) => res.json() as Promise<ReportType[]>);
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
 }
 
 const Header = async () => {
