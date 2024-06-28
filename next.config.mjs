@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['angelinedesdevises.fr', '127.0.0.1'],
+        domains: ['api.angelinedesdevises.fr', '127.0.0.1'],
     },
 };
 
