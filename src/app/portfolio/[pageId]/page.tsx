@@ -54,31 +54,20 @@ export default async function ImagesPage({
 }: {
   params: { pageId: string };
 }) {
-  const [information, images] = await Promise.all([
-    getPageInformation(params.pageId),
-    getImages(params.pageId),
-  ]);
-  const imagesRefactor = images.reduce(
-    (acc: ImageType[], curr, currentIndex) =>
-      currentIndex === 0 && information.article
-        ? [...acc, curr, { id: -1, description: information.article }]
-        : [...acc, curr],
-    [] as ImageType[],
-  );
   return (
     <main className="mt-8 md:mt-32">
       <Suspense>
-        <FullPage images={imagesRefactor} />
+        <FullPage pageId={params.pageId} />
       </Suspense>
       <Suspense
         key={params.pageId}
         fallback={
-          <div className="flex-1 flex justify-between items-center">
+          <div className="flex-1 flex justify-center items-center">
             <LoaderCircle className="rotate" />
           </div>
         }
       >
-        <ImagesContainer images={imagesRefactor} />
+        <ImagesContainer pageId={params.pageId} />
       </Suspense>
     </main>
   );

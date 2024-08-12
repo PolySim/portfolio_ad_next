@@ -31,6 +31,7 @@ const SmallImage = async ({
         alt={`image_${image.id}`}
         width={width}
         height={height}
+        priority
         className="absolute top-0 left-0 w-full"
         style={{ aspectRatio: `${width}/${height}` }}
       />
@@ -39,6 +40,7 @@ const SmallImage = async ({
         alt={`image_${image.id}`}
         width={500}
         height={325}
+        loading="lazy"
         className="absolute top-0 left-0 w-full h-auto"
       />
       {image.description && image.description !== "" && (
