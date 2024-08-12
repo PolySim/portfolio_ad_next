@@ -72,7 +72,11 @@ export default async function ImagesPage({
       </Suspense>
       <Suspense
         key={params.pageId}
-        fallback={<LoaderCircle className="rotate" />}
+        fallback={
+          <div className="flex-1 flex justify-between items-center">
+            <LoaderCircle className="rotate" />
+          </div>
+        }
       >
         <ImagesContainer images={imagesRefactor} />
       </Suspense>
