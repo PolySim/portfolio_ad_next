@@ -1,15 +1,13 @@
 import { ImageType } from "@/app/portfolio/[pageId]/page";
-import Link from "next/link";
 import Image from "next/image";
 import probe from "probe-image-size";
+import ImageContainer from "@/ui/Portfolio/ImageContainer";
 
 const SmallImage = async ({
   image,
-  pageId,
   index,
 }: {
   image: ImageType;
-  pageId: string;
   index: number;
 }) => {
   const ImageSrc = await fetch(
@@ -26,10 +24,7 @@ const SmallImage = async ({
   }
 
   return (
-    <Link
-      href={`/portfolio/${pageId}?open=true&imageClick=${index}`}
-      className={`${height > width ? "row-span-2" : "row-span-1"} group hover:scale-95 transition relative w-full`}
-    >
+    <ImageContainer index={index}>
       <Image
         src={`${process.env.API_URL}/api/images/${image.id}`}
         alt={`image_${image.id}`}
@@ -41,7 +36,7 @@ const SmallImage = async ({
           {image.description}
         </span>
       )}
-    </Link>
+    </ImageContainer>
   );
 };
 

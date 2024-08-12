@@ -4,15 +4,9 @@ import React from "react";
 import FullImage from "@/ui/Portfolio/Fullpage/FullImage";
 import FullArticle from "@/ui/Portfolio/Fullpage/FullArticle";
 
-const FullPage = async ({
-  images,
-  searchParams,
-}: {
-  images: ImageType[];
-  searchParams: { open: string; imageClick: string };
-}) => {
+const FullPage = async ({ images }: { images: ImageType[] }) => {
   return (
-    <FullPageContainer searchParams={searchParams}>
+    <FullPageContainer>
       {images.map((image) => (
         <React.Fragment key={image.id}>
           {image.id === -1 ? (
