@@ -2,8 +2,8 @@ import { create } from "zustand";
 import { RefObject } from "react";
 
 type UseFullPageStore = {
-  currentIndex: number;
-  setCurrentIndex: (index: number) => void;
+  currentIndex: number | null;
+  setCurrentIndex: (index: number | null) => void;
   containerRef: RefObject<HTMLDivElement> | null;
   setContainerRef: (ref: RefObject<HTMLDivElement>) => void;
   handleScroll: (
@@ -14,8 +14,8 @@ type UseFullPageStore = {
 };
 
 export const useFullPageStore = create<UseFullPageStore>()((set) => ({
-  currentIndex: 0,
-  setCurrentIndex: (index: number) => set({ currentIndex: index }),
+  currentIndex: null,
+  setCurrentIndex: (index) => set({ currentIndex: index }),
   containerRef: null,
   setContainerRef: (ref) => set({ containerRef: ref }),
   handleScroll: (element, add, step) => {

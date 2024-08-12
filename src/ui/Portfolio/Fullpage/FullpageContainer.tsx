@@ -1,35 +1,46 @@
 "use client";
 
-import FullPageInitializer from "@/Initalizer/FullPageInitializer";
-import { PropsWithChildren, useEffect, useRef } from "react";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { useFullPageStore } from "@/store/FullPageStore";
-import { useRouter } from "next/navigation";
 import QuitFullPage from "@/ui/Portfolio/Fullpage/QuitFullPage";
+import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const FullPageContainer = ({
-  searchParams,
-  children,
-}: PropsWithChildren<{
-  searchParams: { open: string; imageClick: string };
-}>) => {
+const FullPageContainer = ({ children }: PropsWithChildren) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const currentIndex = useFullPageStore((state) => state.currentIndex);
+  const setCurrentIndex = useFullPageStore((state) => state.setCurrentIndex);
   const handleScroll = useFullPageStore((state) => state.handleScroll);
   const containerRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
 
   useEffect(() => {
-    handleScroll(containerRef, true, parseInt(searchParams.imageClick));
-  });
+    if (currentIndex === null) {
+      setIsOpen(false);
+    } else if (!isOpen) {
+      setTimeout(() => {
+        setIsOpen(true);
+      }, 100);
+    }
+    const element = containerRef.current;
+    if (element) {
+      element.scrollLeft = (currentIndex || 0) * window.innerWidth;
+    }
+  }, [currentIndex, isOpen]);
 
   useEffect(() => {
-    document.body.style.overflow =
-      searchParams.open === "true" ? "hidden" : "auto";
-  }, [searchParams.open]);
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     const keyDown = (e: KeyboardEvent) => {
       switch (e.key) {
         case "Escape":
-          router.back();
+          setCurrentIndex(null);
           break;
         case "ArrowLeft":
           handleScroll(containerRef, false, 1);
@@ -45,22 +56,37 @@ const FullPageContainer = ({
   });
 
   return (
-    <FullPageInitializer
-      currentIndex={searchParams.imageClick}
-      containerRef={containerRef}
-    >
-      {searchParams.open === "true" && (
-        <>
-          <QuitFullPage />
-          <div
-            className="flex scroll-smooth snap-mandatory snap-x fixed top-0 left-0 h-screen w-screen overflow-x-scroll bg-white z-40 disable_scrollbar"
-            ref={containerRef}
+    currentIndex !== null && (
+      <>
+        <QuitFullPage />
+        <div
+          className={cn(
+            "flex fixed top-0 left-0 bg-black/70 w-screen h-screen overflow-x-auto snap-x snap-mandatory disable_scrollbar z-40",
+            {
+              "scroll-smooth": isOpen,
+            },
+          )}
+          onContextMenu={(e) => e.preventDefault()}
+          ref={containerRef}
+        >
+          <Button
+            variant="ghost"
+            onClick={() => handleScroll(containerRef, false, 1)}
+            className="fixed top-1/2 left-4 -translate-y-1/2 z-20"
           >
-            {children}
-          </div>
-        </>
-      )}
-    </FullPageInitializer>
+            <ChevronLeft className="text-white" size={32} />
+          </Button>
+          <Button
+            variant="ghost"
+            onClick={() => handleScroll(containerRef, true, 1)}
+            className="fixed top-1/2 right-4 -translate-y-1/2 z-20"
+          >
+            <ChevronRight className="text-white" size={32} />
+          </Button>
+          {children}
+        </div>
+      </>
+    )
   );
 };
 

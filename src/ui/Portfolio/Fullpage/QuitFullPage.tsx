@@ -1,23 +1,22 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useFullPageStore } from "@/store/FullPageStore";
+import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const QuitFullPage = () => {
-  const router = useRouter();
+  const setCurrentIndex = useFullPageStore((state) => state.setCurrentIndex);
+
   return (
-    <div
-      className="fixed top-6 right-6 z-50 cursor-pointer"
-      onClick={() => router.back()}
+    <Button
+      variant="ghost"
+      className="fixed top-6 right-6 z-50"
+      onClick={() => {
+        setCurrentIndex(null);
+      }}
     >
-      <svg width={30} height={30} viewBox="0 0 24 24" fill="none">
-        <path
-          d="M20 20L4 4.00003M20 4L4.00002 20"
-          stroke="black"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </svg>
-    </div>
+      <X size={30} className="text-white" />
+    </Button>
   );
 };
 

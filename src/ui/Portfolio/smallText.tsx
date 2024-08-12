@@ -1,5 +1,4 @@
-import { ImageType } from "@/app/portfolio/[pageId]/page";
-import Link from "next/link";
+import ImageContainer from "@/ui/Portfolio/ImageContainer";
 
 const shortText: (text: string) => string = (text) => {
   const words = text.split(" ");
@@ -9,25 +8,14 @@ const shortText: (text: string) => string = (text) => {
   return shortText + "...";
 };
 
-const SmallText = ({
-  image,
-  pageId,
-  index,
-  text,
-}: {
-  image: ImageType;
-  pageId: string;
-  index: number;
-  text: string;
-}) => {
+const SmallText = ({ index, text }: { index: number; text: string }) => {
   return (
-    <Link
-      href={`/portfolio/${pageId}?open=true&imageClick=${index}`}
-      className="flex flex-col justify-center items-center w-full transition relative cursor-pointer hover:scale-95"
-    >
-      <p className="w-10/12 text-md text-gray-700">{shortText(text)}</p>
-      <p className="mt-2 pt-6 font-bold text-sm text-black">READ MORE</p>
-    </Link>
+    <ImageContainer index={index}>
+      <div className="flex flex-col justify-center items-center w-full aspect-video">
+        <p className="w-10/12 text-md text-gray-700">{shortText(text)}</p>
+        <p className="mt-2 pt-6 font-bold text-sm text-black">READ MORE</p>
+      </div>
+    </ImageContainer>
   );
 };
 

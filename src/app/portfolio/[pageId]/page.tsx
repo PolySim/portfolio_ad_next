@@ -1,8 +1,8 @@
 import { ReportType } from "@/model/reportModel";
-import SmallImage from "@/ui/Portfolio/smallImage";
-import SmallText from "@/ui/Portfolio/smallText";
-import React from "react";
+import React, { Suspense } from "react";
 import FullPage from "@/ui/Portfolio/Fullpage/Fullpage";
+import ImagesContainer from "@/ui/Portfolio/ImagesContainer";
+import { LoaderCircle } from "lucide-react";
 
 export type ImageType = {
   id: number;
@@ -39,7 +39,10 @@ export const generateMetadata = async ({
   return information.article
     ? {
         title: information.title || "Report",
-        description: information.article,
+        description:
+          information.article.length > 300
+            ? information.article.slice(0, 300)
+            : information.article,
       }
     : {
         title: information.title || "Report",
@@ -48,13 +51,13 @@ export const generateMetadata = async ({
 
 export default async function ImagesPage({
   params,
-  searchParams,
 }: {
   params: { pageId: string };
-  searchParams: { open: string; imageClick: string };
 }) {
-  const information = await getPageInformation(params.pageId);
-  const images = await getImages(params.pageId);
+  const [information, images] = await Promise.all([
+    getPageInformation(params.pageId),
+    getImages(params.pageId),
+  ]);
   const imagesRefactor = images.reduce(
     (acc: ImageType[], curr, currentIndex) =>
       currentIndex === 0 && information.article
@@ -64,23 +67,19 @@ export default async function ImagesPage({
   );
   return (
     <main className="mt-8 md:mt-32">
-      <FullPage images={imagesRefactor} searchParams={searchParams} />
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 justify-center items-stretch w-screen max-w-6xl mx-auto p-4">
-        {imagesRefactor.map((image, index) => (
-          <React.Fragment key={index}>
-            {image.id === -1 ? (
-              <SmallText
-                text={information.article || ""}
-                pageId={params.pageId}
-                image={image}
-                index={index}
-              />
-            ) : (
-              <SmallImage pageId={params.pageId} image={image} index={index} />
-            )}
-          </React.Fragment>
-        ))}
-      </div>
+      <Suspense>
+        <FullPage images={imagesRefactor} />
+      </Suspense>
+      <Suspense
+        key={params.pageId}
+        fallback={
+          <div className="flex-1 flex justify-between items-center">
+            <LoaderCircle className="rotate" />
+          </div>
+        }
+      >
+        <ImagesContainer images={imagesRefactor} />
+      </Suspense>
     </main>
   );
 }
