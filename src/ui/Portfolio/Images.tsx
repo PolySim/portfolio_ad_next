@@ -1,7 +1,8 @@
 import { ImageType } from "@/app/portfolio/[pageId]/page";
-import React from "react";
+import React, { Suspense } from "react";
 import SmallText from "@/ui/Portfolio/smallText";
 import SmallImage from "@/ui/Portfolio/smallImage";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Images = ({ images, cols }: { images: ImageType[]; cols: number }) => {
   const imagesArray: ImageType[][] = images.reduce(
@@ -33,7 +34,14 @@ const Images = ({ images, cols }: { images: ImageType[]; cols: number }) => {
                   index={getIndex(image.id)}
                 />
               ) : (
-                <SmallImage image={image} index={getIndex(image.id)} />
+                <Suspense
+                  key={image.id}
+                  fallback={
+                    <Skeleton className="w-full min-w-4 min-h-4 aspect-video" />
+                  }
+                >
+                  <SmallImage image={image} index={getIndex(image.id)} />
+                </Suspense>
               )}
             </React.Fragment>
           ))}

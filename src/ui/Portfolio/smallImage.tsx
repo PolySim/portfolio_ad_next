@@ -1,7 +1,7 @@
 import { ImageType } from "@/app/portfolio/[pageId]/page";
 import Image from "next/image";
-import probe from "probe-image-size";
 import ImageContainer from "@/ui/Portfolio/ImageContainer";
+import probe from "probe-image-size";
 
 const SmallImage = async ({
   image,
@@ -25,11 +25,21 @@ const SmallImage = async ({
 
   return (
     <ImageContainer index={index}>
+      <div className="w-full" style={{ aspectRatio: `${width}/${height}` }} />
+      <Image
+        src={`${process.env.API_URL}/api/images/${image.id}/blur`}
+        alt={`image_${image.id}`}
+        width={width}
+        height={height}
+        className="absolute top-0 left-0 w-full"
+        style={{ aspectRatio: `${width}/${height}` }}
+      />
       <Image
         src={`${process.env.API_URL}/api/images/${image.id}`}
         alt={`image_${image.id}`}
-        width={width}
-        height={height > width ? 3 * width : 1.5 * width}
+        width={500}
+        height={325}
+        className="absolute top-0 left-0 w-full h-auto"
       />
       {image.description && image.description !== "" && (
         <span className="flex justify-center bg-white/50 w-full text-center py-2 opacity-0 group-hover:opacity-100 transition -translate-y-1/2 group-hover:-translate-y-full backdrop-blur-md">

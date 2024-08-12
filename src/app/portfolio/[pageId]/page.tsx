@@ -1,7 +1,8 @@
 import { ReportType } from "@/model/reportModel";
-import React from "react";
+import React, { Suspense } from "react";
 import FullPage from "@/ui/Portfolio/Fullpage/Fullpage";
 import ImagesContainer from "@/ui/Portfolio/ImagesContainer";
+import { LoaderCircle } from "lucide-react";
 
 export type ImageType = {
   id: number;
@@ -66,8 +67,15 @@ export default async function ImagesPage({
   );
   return (
     <main className="mt-8 md:mt-32">
-      <FullPage images={imagesRefactor} />
-      <ImagesContainer images={imagesRefactor} />
+      <Suspense>
+        <FullPage images={imagesRefactor} />
+      </Suspense>
+      <Suspense
+        key={params.pageId}
+        fallback={<LoaderCircle className="rotate" />}
+      >
+        <ImagesContainer images={imagesRefactor} />
+      </Suspense>
     </main>
   );
 }
