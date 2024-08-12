@@ -11,7 +11,7 @@ const NavBar = ({ reports }: { reports: ReportType[] }) => {
         PORTFOLIO
       </Link>
       <span className="opacity-15 text-40 mx-6 ">⚫</span>
-      <div className="flex flex-col relative group">
+      <div className="flex flex-col relative group z-20">
         <p className="group-hover:text-customblue-300 transition">REPORTAGE</p>
         <div className="hidden absolute w-max rounded-b-lg top-0 mt-5 pt-3 -left-3 text-left group-hover:flex flex-col gap-1 bg-white">
           {(reports || []).map((report, i) => (
