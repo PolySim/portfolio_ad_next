@@ -1,12 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { sendEmail } from "@/ui/Contact/SendEmailAction";
 
 const ContactForm = () => {
   const form = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {}, []);
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();

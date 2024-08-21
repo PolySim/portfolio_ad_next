@@ -10,7 +10,13 @@ export default function AboutPage() {
   return (
     <main className="w-screen flex items-center flex-col">
       <div className="w-9/12 max-w-7xl">
-        <Image src={ContactImg} alt="Landscape" className="w-full h-auto" />
+        <Image
+          src={ContactImg}
+          width={1280}
+          height={640}
+          alt="Landscape"
+          className="w-full h-auto"
+        />
       </div>
       <div className="w-9/12 flex flex-col items-center">
         <h2 className="mt-8 font-bold text-3xl">Contact</h2>
