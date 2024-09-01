@@ -7,6 +7,7 @@ const nextConfig = {
       "141.94.205.91",
       "141.94.205.91:5066",
     ],
+    unoptimized: true,
   },
 };
 

@@ -17,6 +17,7 @@ const SmallImage = ({ image, index }: { image: ImageType; index: number }) => {
           alt={`image_${image.id}`}
           width={500}
           height={325}
+          unoptimized
           priority
           className="w-full"
         />

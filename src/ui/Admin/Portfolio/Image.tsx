@@ -88,8 +88,8 @@ export default function ImageSorted({
       <Image
         src={`${process.env.NEXT_PUBLIC_API_URL}/api/images/${image.id}`}
         alt={`image_${image.id}`}
-        width={370}
-        height={240}
+        width={500}
+        height={325}
         ref={imageRef}
         className="w-full h-auto cursor-grab"
       />
