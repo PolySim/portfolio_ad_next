@@ -40,7 +40,7 @@ export default withPageAuthRequired(
             page.index === 0 ? (
               <Dialog key={page.title}>
                 <DialogTrigger asChild>
-                  <div className="rounded-lg shadow p-6 group hover:bg-customblue-300 transition cursor-pointer">
+                  <div className="rounded-lg shadow-sm p-6 group hover:bg-customblue-300 transition cursor-pointer">
                     <h2 className="text-2xl font-helvetica group-hover:text-white transition">
                       {page.title}
                     </h2>
@@ -51,7 +51,7 @@ export default withPageAuthRequired(
             ) : (
               <div
                 key={page.title}
-                className="flex justify-between gap-4 rounded-lg shadow p-6 group hover:bg-customblue-300 transition"
+                className="flex justify-between gap-4 rounded-lg shadow-sm p-6 group hover:bg-customblue-300 transition"
               >
                 <h2 className="text-2xl font-helvetica group-hover:text-white transition">
                   {page.title}

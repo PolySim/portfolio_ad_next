@@ -99,7 +99,7 @@ export default function ImageSorted({
           <DialogTrigger asChild>
             <Button variant="outline">Edit image</Button>
           </DialogTrigger>
-          <DialogContent className="z-[100000]">
+          <DialogContent className="z-100000">
             <DialogHeader>
               <DialogTitle>Edit description</DialogTitle>
             </DialogHeader>
