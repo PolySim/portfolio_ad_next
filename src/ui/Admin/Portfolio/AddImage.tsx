@@ -5,6 +5,7 @@ import { uploadImages } from "@/serveurActions/images";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
+import { compressor } from "@/ui/Admin/Portfolio/compressor";
 
 export default function AddImage({ pageId }: { pageId: string }) {
   const [imagesDownload, setImagesDownLoad] = useState<FileList | null>(null);
@@ -14,7 +15,12 @@ export default function AddImage({ pageId }: { pageId: string }) {
     if (imagesDownload) {
       const formData = new FormData();
       for (let i = 0; i < imagesDownload.length; i++) {
-        formData.append(`images`, imagesDownload[i]);
+        const newFile = await compressor({
+          file: imagesDownload[i],
+          maxSize: 2_000_000,
+          quality: 0.95,
+        });
+        formData.append(`images`, newFile);
       }
       formData.append("hikingId", "1");
       await uploadImages(formData, pageId).then((res) => {
