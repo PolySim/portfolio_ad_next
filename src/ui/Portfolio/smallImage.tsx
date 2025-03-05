@@ -13,7 +13,7 @@ const SmallImage = ({ image, index }: { image: ImageType; index: number }) => {
     <ImageContainer index={index}>
       {!isLoaded && (
         <Image
-          src={`${process.env.NEXT_PUBLIC_API_URL}/api/images/${image.id}/blur-sm`}
+          src={`${process.env.NEXT_PUBLIC_API_URL}/api/images/${image.id}/blur`}
           alt={`image_${image.id}`}
           width={500}
           height={325}
