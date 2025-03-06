@@ -21,6 +21,9 @@ export default async function RootLayout({
 }: Readonly<PropsWithChildren>) {
   return (
     <html lang="fr">
+      <head>
+        <link rel="canonical" />
+      </head>
       <UserProvider>
         <body>
           <Header />
