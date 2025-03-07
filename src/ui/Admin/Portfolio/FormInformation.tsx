@@ -1,14 +1,14 @@
 "use client";
 
-import { ReportType } from "@/model/reportModel";
+import { ReportType } from "@/model/report.model";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { debounce } from "next/dist/server/utils";
 import { useEffect } from "react";
-import { updateReportInformation } from "@/ui/Admin/Portfolio/updateReportInformation";
 import { toast } from "@/components/ui/use-toast";
+import { updateReportInformation } from "@/actions/page";
 
 export default function FormInformation({
   information,
@@ -27,16 +27,19 @@ export default function FormInformation({
       (values.title !== information.title ||
         values.article !== information.article)
     ) {
-      await updateReportInformation(pageId, data).then((res) =>
-        res === 200
-          ? toast({
-              description: "Sauvegarde réussie",
-            })
-          : toast({
-              description: "Une erreur est survenue",
-              variant: "destructive",
-            }),
-      );
+      const res = await updateReportInformation(pageId, data);
+
+      if (res.success) {
+        toast({
+          description: "Sauvegarde des informations réussie",
+        });
+      } else {
+        toast({
+          description:
+            "Une erreur est survenue lors de la sauvegarde des informations",
+          variant: "destructive",
+        });
+      }
     }
   }, 1000);
 

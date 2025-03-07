@@ -1,34 +1,8 @@
-import { ReportType } from "@/model/reportModel";
 import React, { Suspense } from "react";
 import FullPage from "@/ui/Portfolio/Fullpage/Fullpage";
 import ImagesContainer from "@/ui/Portfolio/ImagesContainer";
 import { LoaderCircle } from "lucide-react";
-
-export type ImageType = {
-  id: number;
-  description?: string;
-};
-
-const getPageInformation = async (pageId: string) => {
-  "use server";
-  return await fetch(`${process.env.API_URL}/api/pages/${pageId}`, {
-    method: "GET",
-    next: { tags: [`page_information_${pageId}`] },
-  }).then((res) => res.json() as Promise<ReportType>);
-};
-
-const getImages = async (pageId: string) => {
-  "use server";
-  try {
-    return await fetch(`${process.env.API_URL}/api/images?num=${pageId}`, {
-      method: "GET",
-      next: { tags: [`images_${pageId}`] },
-    }).then((res) => res.json() as Promise<ImageType[]>);
-  } catch (e) {
-    console.log(e);
-    return [];
-  }
-};
+import { getPageInformation } from "@/actions/page";
 
 export const generateMetadata = async ({
   params,

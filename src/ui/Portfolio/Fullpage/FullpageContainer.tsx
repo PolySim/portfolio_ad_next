@@ -1,7 +1,7 @@
 "use client";
 
 import { PropsWithChildren, useEffect, useRef, useState } from "react";
-import { useFullPageStore } from "@/store/FullPageStore";
+import { useFullPageStore } from "@/store/fullPage.store";
 import QuitFullPage from "@/ui/Portfolio/Fullpage/QuitFullPage";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -10,16 +10,24 @@ import { Button } from "@/components/ui/button";
 const FullPageContainer = ({ children }: PropsWithChildren) => {
   const [isOpen, setIsOpen] = useState(false);
   const currentIndex = useFullPageStore((state) => state.currentIndex);
-  const setCurrentIndex = useFullPageStore((state) => state.setCurrentIndex);
-  const handleScroll = useFullPageStore((state) => state.handleScroll);
+  const handleScroll = useFullPageStore.getState().handleScroll;
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const toggleOpen = (open: boolean) => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    setIsOpen(open);
+  };
 
   useEffect(() => {
     if (currentIndex === null) {
-      setIsOpen(false);
+      toggleOpen(false);
     } else if (!isOpen) {
       setTimeout(() => {
-        setIsOpen(true);
+        toggleOpen(true);
       }, 100);
     }
     const element = containerRef.current;
@@ -29,15 +37,8 @@ const FullPageContainer = ({ children }: PropsWithChildren) => {
   }, [currentIndex, isOpen]);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
     const keyDown = (e: KeyboardEvent) => {
+      const setCurrentIndex = useFullPageStore.getState().setCurrentIndex;
       switch (e.key) {
         case "Escape":
           setCurrentIndex(null);

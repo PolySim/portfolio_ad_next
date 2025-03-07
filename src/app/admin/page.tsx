@@ -1,20 +1,16 @@
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
-import { ReportType } from "@/model/reportModel";
 import Link from "next/link";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import AddReportModal from "@/ui/Admin/Home/AddReportModal";
 import { SquareArrowOutUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DeleteReport from "@/ui/Admin/Home/DeleteReport";
+import { getReports } from "@/actions/page";
 
-async function getPages() {
-  "use server";
-  try {
-    const reports = await fetch(`${process.env.API_URL}/api/pages`, {
-      method: "GET",
-      next: { tags: ["reports"] },
-    }).then((res) => res.json() as Promise<ReportType[]>);
-    return [
+export default withPageAuthRequired(
+  async function AdminPage() {
+    const reports = await getReports();
+    const pages = [
       ...reports,
       { index: 3, title: "Portfolio" },
       { index: 1, title: "Portrait" },
@@ -23,15 +19,6 @@ async function getPages() {
       { title: "A_propos" },
       { title: "Ordre_des_reportages" },
     ];
-  } catch (e) {
-    console.log(e);
-    return [];
-  }
-}
-
-export default withPageAuthRequired(
-  async function AdminPage() {
-    const pages = await getPages();
 
     return (
       <main>

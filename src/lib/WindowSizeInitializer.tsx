@@ -1,6 +1,6 @@
 "use client";
 
-import { useWindowSizeStore } from "@/store/windowSize";
+import { useWindowSizeStore } from "@/store/windowSize.store";
 import { useEffect } from "react";
 
 const WindowSizeInitializer = () => {

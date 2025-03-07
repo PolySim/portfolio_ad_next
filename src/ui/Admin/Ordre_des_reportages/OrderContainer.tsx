@@ -1,12 +1,12 @@
 "use client";
 
-import { ReportType } from "@/model/reportModel";
+import { ReportType } from "@/model/report.model";
 import { useDragAndDrop } from "@formkit/drag-and-drop/react";
 import React from "react";
 import ReportOrder from "@/ui/Admin/Ordre_des_reportages/Report";
 import { debounce } from "next/dist/server/utils";
-import { orderReportsAction } from "@/ui/Admin/Ordre_des_reportages/OrderReportAction";
 import { toast } from "@/components/ui/use-toast";
+import { updatePageOrder } from "@/actions/page";
 
 const OrderContainer = ({ reports }: { reports: ReportType[] }) => {
   const [parent, tapes, setValue] = useDragAndDrop<HTMLDivElement, ReportType>(
@@ -20,19 +20,18 @@ const OrderContainer = ({ reports }: { reports: ReportType[] }) => {
 
   const onSubmit = debounce(async (lastTapes: ReportType[]) => {
     if (lastTapes !== tapes) return;
-    await orderReportsAction(tapes).then((res) => {
-      if (res === 200) {
-        toast({
-          description: "Sauvegarde réussie",
-        });
-      } else {
-        toast({
-          description: "Une erreur est survenue",
-          variant: "destructive",
-        });
-        setValue(lastTapes);
-      }
-    });
+    const res = await updatePageOrder(tapes.map((tape) => tape.index));
+    if (res.success) {
+      toast({
+        description: "Sauvegarde réussie",
+      });
+    } else {
+      toast({
+        description: "Une erreur est survenue",
+        variant: "destructive",
+      });
+      setValue(reports);
+    }
   }, 1000);
 
   return (

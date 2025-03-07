@@ -3,28 +3,39 @@
 import { FieldValue, useForm } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { AboutType } from "@/model/aboutModel";
-import { submitAboutAction } from "@/ui/Admin/About/SubmitAboutAction";
+import { AboutType } from "@/model/about.model";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { updateBiography } from "@/actions/about";
+
+const formSchema = z.object({
+  fr: z.string(),
+  en: z.string(),
+});
 
 export default function AdminAboutForm({
   biography,
 }: {
   biography: AboutType;
 }) {
-  const form = useForm({ defaultValues: biography });
+  const form = useForm({
+    defaultValues: biography,
+    resolver: zodResolver(formSchema),
+  });
   const { toast } = useToast();
 
   const onSubmit = async (data: FieldValue<AboutType>) => {
-    const res = await submitAboutAction(data as AboutType);
-    if (res === 200) {
+    const res = await updateBiography(data as AboutType);
+    if (res.success) {
       toast({
-        description: "Sauvegarde réussie",
+        description: "Sauvegarde des biographies réussie",
       });
     } else {
       toast({
-        description: "Une erreur est survenue",
+        description:
+          "Une erreur est survenue lors de la sauvegarde des biographies",
         variant: "destructive",
       });
     }

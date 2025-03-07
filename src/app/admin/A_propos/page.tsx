@@ -1,19 +1,8 @@
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
-import { AboutType } from "@/model/aboutModel";
 import Link from "next/link";
 import AdminAboutForm from "@/ui/Admin/About/AboutForm";
 
-const getBiography = async () => {
-  "use server";
-  try {
-    return await fetch(`${process.env.API_URL}/api/about`, {
-      method: "GET",
-      next: { tags: ["about"] },
-    }).then((res) => res.json() as Promise<AboutType>);
-  } catch (e) {
-    return { fr: "", en: "" };
-  }
-};
+import { getBiography } from "@/actions/about";
 
 export default withPageAuthRequired(
   async function AdminAboutPage() {

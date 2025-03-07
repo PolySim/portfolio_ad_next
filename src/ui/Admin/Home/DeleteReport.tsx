@@ -2,7 +2,7 @@
 
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { deleteReport } from "@/serveurActions/page";
+import { deleteReport } from "@/actions/page";
 import { toast } from "@/components/ui/use-toast";
 import {
   Dialog,
@@ -16,13 +16,12 @@ import {
 
 const DeleteReport = ({ id }: { id: number }) => {
   const onDelete = async () => {
-    try {
-      await deleteReport(id).then(() =>
-        toast({
-          description: "Suppression réussie",
-        }),
-      );
-    } catch (error) {
+    const res = await deleteReport(id);
+    if (res.success) {
+      toast({
+        description: "Suppression réussie",
+      });
+    } else {
       toast({
         description: "Erreur lors de la suppression",
         variant: "destructive",

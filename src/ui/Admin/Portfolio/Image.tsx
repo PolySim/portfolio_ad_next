@@ -1,6 +1,5 @@
 "use client";
 
-import { ImageType } from "@/app/portfolio/[pageId]/page";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -16,9 +15,9 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import { updateImageDescriptionAction } from "@/ui/Admin/Portfolio/updateImageDescriptionAction";
-import { deleteImage } from "@/serveurActions/images";
+import { deleteImage, updateImageDescription } from "@/actions/images";
 import Image from "next/image";
+import { ImageType } from "@/model/image.model";
 
 export default function ImageSorted({
   image,
@@ -48,35 +47,32 @@ export default function ImageSorted({
   }, [imageRef]);
 
   const onSubmit = async () => {
-    await updateImageDescriptionAction(image.id, description, pageId).then(
-      (res) => {
-        if (res === 200) {
-          toast({
-            description: "Sauvegarde réussie",
-          });
-        } else {
-          toast({
-            description: "Une erreur est survenue",
-            variant: "destructive",
-          });
-        }
-      },
-    );
+    const res = await updateImageDescription(image.id, description, pageId);
+    if (res.success) {
+      toast({
+        description: "Sauvegarde des informations réussie",
+      });
+    } else {
+      toast({
+        description:
+          "Une erreur est survenue lors de la sauvegarde des informations",
+        variant: "destructive",
+      });
+    }
   };
 
   const onDelete = async () => {
-    await deleteImage(image.id, pageId).then((res) => {
-      if (res === 200) {
-        toast({
-          description: "Suppression réussie",
-        });
-      } else {
-        toast({
-          description: "Une erreur est survenue",
-          variant: "destructive",
-        });
-      }
-    });
+    const res = await deleteImage(image.id, pageId);
+    if (res.success) {
+      toast({
+        description: "Suppression réussie",
+      });
+    } else {
+      toast({
+        description: "Une erreur est survenue lors de la suppresion du média",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -88,7 +84,6 @@ export default function ImageSorted({
       <Image
         src={`${process.env.NEXT_PUBLIC_API_URL}/api/images/${image.id}`}
         alt={`image_${image.id}`}
-        // unoptimized
         width={500}
         height={325}
         ref={imageRef}

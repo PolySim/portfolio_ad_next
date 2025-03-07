@@ -1,11 +1,11 @@
 "use client";
 
-import { useFullPageStore } from "@/store/FullPageStore";
+import { useFullPageStore } from "@/store/fullPage.store";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const QuitFullPage = () => {
-  const setCurrentIndex = useFullPageStore((state) => state.setCurrentIndex);
+  const setCurrentIndex = useFullPageStore.getState().setCurrentIndex;
 
   return (
     <Button

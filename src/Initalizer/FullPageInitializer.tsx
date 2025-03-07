@@ -1,6 +1,6 @@
 "use client";
 
-import { useFullPageStore } from "@/store/FullPageStore";
+import { useFullPageStore } from "@/store/fullPage.store";
 import { PropsWithChildren, RefObject } from "react";
 
 const FullPageInitializer = ({

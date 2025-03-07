@@ -1,12 +1,12 @@
 "use client";
 
-import { ImageType } from "@/app/portfolio/[pageId]/page";
 import { useDragAndDrop } from "@formkit/drag-and-drop/react";
 import React, { useEffect } from "react";
 import ImageSorted from "@/ui/Admin/Portfolio/Image";
 import { debounce } from "next/dist/server/utils";
 import { toast } from "@/components/ui/use-toast";
-import { reorderImagesAction } from "@/ui/Admin/Portfolio/reorderImagesAction";
+import { ImageType } from "@/model/image.model";
+import { updateImagesOrder } from "@/actions/images";
 
 const arrayIsEqual = (images1: ImageType[], images2: ImageType[]) => {
   for (let i = 0; i < images1.length; i++) {
@@ -37,18 +37,18 @@ export default function PortfolioAdminImages({
 
   const onSubmit = debounce(async (lastImagesSorted: ImageType[]) => {
     if (!arrayIsEqual(lastImagesSorted, imagesSorted)) return;
-    await reorderImagesAction(imagesSorted, pageId).then((res) => {
-      if (res === 200) {
-        toast({
-          description: "Sauvegarde réussie",
-        });
-      } else {
-        toast({
-          description: "Une erreur est survenue",
-          variant: "destructive",
-        });
-      }
-    });
+    const res = await updateImagesOrder(imagesSorted, pageId);
+    if (res.success) {
+      toast({
+        description: "Trie des images réussie",
+      });
+    } else {
+      toast({
+        description: "Une erreur est survenue lors du tri des images",
+        variant: "destructive",
+      });
+      setImages(images);
+    }
   }, 1000);
 
   return (

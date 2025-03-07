@@ -1,4 +1,4 @@
-import { ReportType } from "@/model/reportModel";
+import { ReportType } from "@/model/report.model";
 
 const ReportOrder = ({ report }: { report: ReportType }) => {
   return (

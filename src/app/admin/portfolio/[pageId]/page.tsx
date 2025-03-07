@@ -2,8 +2,8 @@ import Link from "next/link";
 import React from "react";
 import FormInformation from "@/ui/Admin/Portfolio/FormInformation";
 import PortfolioAdminImages from "@/ui/Admin/Portfolio/PortfolioAdminImages";
-import { getPageInformation } from "@/serveurActions/page";
-import { getImages } from "@/serveurActions/images";
+import { getPageInformation } from "@/actions/page";
+import { getImages } from "@/actions/images";
 import AddImage from "@/ui/Admin/Portfolio/AddImage";
 
 export default async function PortfolioAdminPage({

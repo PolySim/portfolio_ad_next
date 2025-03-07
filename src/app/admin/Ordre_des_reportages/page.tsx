@@ -1,20 +1,7 @@
-import { ReportType } from "@/model/reportModel";
 import OrderContainer from "@/ui/Admin/Ordre_des_reportages/OrderContainer";
 import React from "react";
 import Link from "next/link";
-
-async function getReports() {
-  "use server";
-  try {
-    return await fetch(`${process.env.API_URL}/api/pages`, {
-      method: "GET",
-      next: { tags: ["reports"] },
-    }).then((res) => res.json() as Promise<ReportType[]>);
-  } catch (e) {
-    console.log(e);
-    return [];
-  }
-}
+import { getReports } from "@/actions/page";
 
 export default async function OrderReportsPage() {
   const reports = await getReports();

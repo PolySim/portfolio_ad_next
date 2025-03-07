@@ -1,13 +1,13 @@
 "use client";
 
 import { PropsWithChildren } from "react";
-import { useFullPageStore } from "@/store/FullPageStore";
+import { useFullPageStore } from "@/store/fullPage.store";
 
 const ImageContainer = ({
   children,
   index,
 }: PropsWithChildren<{ index: number }>) => {
-  const setImageIndexOpen = useFullPageStore((state) => state.setCurrentIndex);
+  const setImageIndexOpen = useFullPageStore.getState().setCurrentIndex;
 
   return (
     <div
