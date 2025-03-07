@@ -1,6 +1,5 @@
 "use client";
 
-import { ImageType } from "@/app/portfolio/[pageId]/page";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -17,8 +16,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { updateImageDescriptionAction } from "@/ui/Admin/Portfolio/updateImageDescriptionAction";
-import { deleteImage } from "@/serveurActions/images";
+import { deleteImage } from "@/actions/images";
 import Image from "next/image";
+import { ImageType } from "@/model/image.model";
 
 export default function ImageSorted({
   image,

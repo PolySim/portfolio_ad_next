@@ -1,6 +1,6 @@
 "use client";
 
-import { ReportType } from "@/model/reportModel";
+import { ReportType } from "@/model/report.model";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";

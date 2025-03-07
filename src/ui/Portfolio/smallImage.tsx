@@ -1,10 +1,10 @@
 "use client";
 
-import { ImageType } from "@/app/portfolio/[pageId]/page";
 import Image from "next/image";
 import ImageContainer from "@/ui/Portfolio/ImageContainer";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { ImageType } from "@/model/image.model";
 
 const SmallImage = ({ image, index }: { image: ImageType; index: number }) => {
   const [isLoaded, setIsLoaded] = useState(false);

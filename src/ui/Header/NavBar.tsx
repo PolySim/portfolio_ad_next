@@ -1,4 +1,4 @@
-import { ReportType } from "@/model/reportModel";
+import { ReportType } from "@/model/report.model";
 import Link from "next/link";
 
 const NavBar = ({ reports }: { reports: ReportType[] }) => {

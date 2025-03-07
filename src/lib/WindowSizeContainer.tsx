@@ -1,7 +1,7 @@
 "use client";
 
 import { PropsWithChildren } from "react";
-import { useWindowSizeStore } from "@/store/windowSize";
+import { useWindowSizeStore } from "@/store/windowSize.store";
 
 const WindowSizeContainer = ({
   children,

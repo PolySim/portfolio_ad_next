@@ -1,7 +1,7 @@
 "use server";
 
-import { ImageType } from "@/app/portfolio/[pageId]/page";
 import { revalidateTag } from "next/cache";
+import { ImageType } from "@/model/image.model";
 
 export const reorderImagesAction = async (
   images: ImageType[],

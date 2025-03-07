@@ -1,6 +1,6 @@
 "use server";
 
-import { AboutType } from "@/model/aboutModel";
+import { AboutType } from "@/model/about.model";
 import { revalidateTag } from "next/cache";
 
 export const submitAboutAction = async (about: AboutType) => {

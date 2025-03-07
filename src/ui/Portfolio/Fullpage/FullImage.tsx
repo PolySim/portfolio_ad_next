@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { ImageType } from "@/app/portfolio/[pageId]/page";
+
+import { ImageType } from "@/model/image.model";
 
 const FullImage = async ({ image }: { image: ImageType }) => {
   return (

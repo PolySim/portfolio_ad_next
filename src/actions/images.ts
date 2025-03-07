@@ -1,14 +1,15 @@
 "use server";
 
-import { ImageType } from "@/app/portfolio/[pageId]/page";
 import { revalidatePath, revalidateTag } from "next/cache";
+import { ImageType } from "@/model/image.model";
 
 export const getImages = async (pageId: string) => {
   try {
-    return await fetch(`${process.env.API_URL}/api/images?num=${pageId}`, {
+    const res = await fetch(`${process.env.API_URL}/api/images?num=${pageId}`, {
       method: "GET",
       next: { tags: [`images_${pageId}`] },
-    }).then((res) => res.json() as Promise<ImageType[]>);
+    });
+    return (await res.json()) as ImageType[];
   } catch (e) {
     console.log(e);
     return [];

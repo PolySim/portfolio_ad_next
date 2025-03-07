@@ -1,6 +1,6 @@
 "use client";
 
-import { ReportType } from "@/model/reportModel";
+import { ReportType } from "@/model/report.model";
 import { useDragAndDrop } from "@formkit/drag-and-drop/react";
 import React from "react";
 import ReportOrder from "@/ui/Admin/Ordre_des_reportages/Report";

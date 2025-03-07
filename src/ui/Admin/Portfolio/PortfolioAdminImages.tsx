@@ -1,12 +1,12 @@
 "use client";
 
-import { ImageType } from "@/app/portfolio/[pageId]/page";
 import { useDragAndDrop } from "@formkit/drag-and-drop/react";
 import React, { useEffect } from "react";
 import ImageSorted from "@/ui/Admin/Portfolio/Image";
 import { debounce } from "next/dist/server/utils";
 import { toast } from "@/components/ui/use-toast";
 import { reorderImagesAction } from "@/ui/Admin/Portfolio/reorderImagesAction";
+import { ImageType } from "@/model/image.model";
 
 const arrayIsEqual = (images1: ImageType[], images2: ImageType[]) => {
   for (let i = 0; i < images1.length; i++) {

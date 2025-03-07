@@ -1,14 +1,14 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { ReportType } from "@/model/reportModel";
+import { ReportType } from "@/model/report.model";
+import { useNavigationStore } from "@/store/navigation.store";
 
-const BurgerMenu = ({
-  reports,
-  isOpen,
-}: {
-  reports: ReportType[];
-  isOpen: boolean;
-}) => {
+const BurgerMenu = ({ reports }: { reports: ReportType[] }) => {
+  const isOpen = useNavigationStore((state) => state.headerIsOpen);
+  const setIsOpen = useNavigationStore((state) => state.toggleHeader);
+
   return (
     <div
       className={cn(
@@ -18,19 +18,33 @@ const BurgerMenu = ({
         },
       )}
     >
-      <Link href="/portfolio/3">PORTFOLIO</Link>
+      <Link onClick={() => setIsOpen(false)} href="/portfolio/3">
+        PORTFOLIO
+      </Link>
       <div className="flex flex-col w-full justify-center items-center gap-5">
         <p className="text-md font-medium">REPORTAGE</p>
         {(reports || []).map((report, i) => (
-          <Link key={`${i}${report.title}`} href={`/portfolio/${report.index}`}>
+          <Link
+            onClick={() => setIsOpen(false)}
+            key={`${i}${report.title}`}
+            href={`/portfolio/${report.index}`}
+          >
             {report.title}
           </Link>
         ))}
       </div>
-      <Link href="/portfolio/1">PORTRAITS</Link>
-      <Link href="/portfolio/2">PUBLICATIONS</Link>
-      <Link href="/contact">CONTACT</Link>
-      <Link href="/apropos">A PROPOS</Link>
+      <Link onClick={() => setIsOpen(false)} href="/portfolio/1">
+        PORTRAITS
+      </Link>
+      <Link onClick={() => setIsOpen(false)} href="/portfolio/2">
+        PUBLICATIONS
+      </Link>
+      <Link onClick={() => setIsOpen(false)} href="/contact">
+        CONTACT
+      </Link>
+      <Link onClick={() => setIsOpen(false)} href="/apropos">
+        A PROPOS
+      </Link>
     </div>
   );
 };

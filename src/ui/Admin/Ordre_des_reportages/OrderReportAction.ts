@@ -1,6 +1,6 @@
 "use server";
 
-import { ReportType } from "@/model/reportModel";
+import { ReportType } from "@/model/report.model";
 import { revalidateTag } from "next/cache";
 
 export const orderReportsAction = async (reports: ReportType[]) => {

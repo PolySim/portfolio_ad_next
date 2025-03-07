@@ -1,23 +1,5 @@
 import { MetadataRoute } from "next";
-import { ReportType } from "@/model/reportModel";
-
-async function getPages() {
-  "use server";
-  try {
-    const reports = await fetch(`${process.env.API_URL}/api/pages`, {
-      method: "GET",
-      next: { tags: ["reports"] },
-    }).then((res) => res.json() as Promise<ReportType[]>);
-    return [
-      ...reports,
-      { index: 3, title: "Portfolio" },
-      { index: 1, title: "Portrait" },
-      { index: 2, title: "Publication" },
-    ];
-  } catch (e) {
-    return [];
-  }
-}
+import { getPages } from "@/actions/page";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const pages = await getPages();

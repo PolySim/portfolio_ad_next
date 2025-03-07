@@ -12,11 +12,24 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { createReport } from "@/serveurActions/page";
+import { createReport } from "@/actions/page";
 import { toast } from "@/components/ui/use-toast";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const formSchema = z.object({
+  title: z.string().min(3, { message: "Le titre est trop court" }),
+  description: z.string().optional(),
+});
 
 const AddReportModal = () => {
-  const form = useForm();
+  const form = useForm({
+    defaultValues: {
+      title: "",
+      description: "",
+    },
+    resolver: zodResolver(formSchema),
+  });
 
   const onSubmit = async () => {
     const values = form.getValues();

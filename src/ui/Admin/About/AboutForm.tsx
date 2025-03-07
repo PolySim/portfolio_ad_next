@@ -3,17 +3,27 @@
 import { FieldValue, useForm } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { AboutType } from "@/model/aboutModel";
+import { AboutType } from "@/model/about.model";
 import { submitAboutAction } from "@/ui/Admin/About/SubmitAboutAction";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const formSchema = z.object({
+  fr: z.string(),
+  en: z.string(),
+});
 
 export default function AdminAboutForm({
   biography,
 }: {
   biography: AboutType;
 }) {
-  const form = useForm({ defaultValues: biography });
+  const form = useForm({
+    defaultValues: biography,
+    resolver: zodResolver(formSchema),
+  });
   const { toast } = useToast();
 
   const onSubmit = async (data: FieldValue<AboutType>) => {

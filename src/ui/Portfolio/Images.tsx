@@ -1,8 +1,8 @@
-import { ImageType } from "@/app/portfolio/[pageId]/page";
 import React, { Suspense } from "react";
 import SmallText from "@/ui/Portfolio/smallText";
 import SmallImage from "@/ui/Portfolio/smallImage";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ImageType } from "@/model/image.model";
 
 const Images = ({ images, cols }: { images: ImageType[]; cols: number }) => {
   const imagesArray: ImageType[][] = images.reduce(
@@ -27,7 +27,7 @@ const Images = ({ images, cols }: { images: ImageType[]; cols: number }) => {
       {imagesArray.map((col, colIndex) => (
         <div className="flex flex-col gap-4 w-full" key={colIndex}>
           {col.map((image, index) => (
-            <React.Fragment key={index}>
+            <React.Fragment key={image.id}>
               {image.id === -1 ? (
                 <SmallText
                   text={image.description || ""}

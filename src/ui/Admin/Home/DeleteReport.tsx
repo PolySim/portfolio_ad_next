@@ -2,7 +2,7 @@
 
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { deleteReport } from "@/serveurActions/page";
+import { deleteReport } from "@/actions/page";
 import { toast } from "@/components/ui/use-toast";
 import {
   Dialog,

@@ -1,21 +1,33 @@
 "use client";
 
-const OpenBurgerMenu = ({
-  isOpen,
-  toggleOpen,
-}: {
-  isOpen: boolean;
-  toggleOpen: () => void;
-}) => {
+import { cn } from "@/lib/utils";
+import { useNavigationStore } from "@/store/navigation.store";
+
+const OpenBurgerMenu = () => {
+  const isOpen = useNavigationStore((state) => state.headerIsOpen);
+
+  const toggleOpen = () => {
+    const toggleHeader = useNavigationStore.getState().toggleHeader;
+    if (isOpen) {
+      document.body.style.overflow = "auto";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
+    toggleHeader();
+  };
+
   return (
-    <div
+    <button
       onClick={() => toggleOpen()}
-      className={`flex z-30 md:hidden relative text-black w-[50px] mt-1 ${isOpen ? "menu-open" : "menu-close"}`}
+      className={cn("flex z-30 md:hidden relative text-black w-[50px] mt-1", {
+        "menu-open": isOpen,
+        "menu-close": !isOpen,
+      })}
     >
       <span />
       <span />
       <span />
-    </div>
+    </button>
   );
 };
 

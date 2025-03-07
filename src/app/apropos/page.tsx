@@ -1,19 +1,6 @@
-import { AboutType } from "@/model/aboutModel";
 import Image from "next/image";
 import AboutImg from "@/image/about.jpeg";
-
-const getBiography = async () => {
-  "use server";
-  try {
-    return await fetch(`${process.env.API_URL}/api/about`, {
-      method: "GET",
-      next: { tags: ["about"] },
-    }).then((res) => res.json() as Promise<AboutType>);
-  } catch (e) {
-    console.log(e);
-    return { fr: "", en: "" };
-  }
-};
+import { getBiography } from "@/actions/page";
 
 export const metadata = {
   title: "A propos",

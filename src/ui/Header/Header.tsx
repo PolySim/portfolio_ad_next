@@ -1,21 +1,8 @@
 import Link from "next/link";
 import PhoneBar from "@/ui/Header/PhoneBar/PhoneBar";
-import { ReportType } from "@/model/reportModel";
 import NavBar from "@/ui/Header/NavBar";
 import SocialNetwork from "@/ui/SocialNetwork/SocialNetwork";
-
-async function getReports() {
-  "use server";
-  try {
-    return await fetch(`${process.env.API_URL}/api/pages`, {
-      method: "GET",
-      next: { tags: ["reports"] },
-    }).then((res) => res.json() as Promise<ReportType[]>);
-  } catch (e) {
-    console.log(e);
-    return [];
-  }
-}
+import { getReports } from "@/actions/page";
 
 const Header = async () => {
   const reports = await getReports();

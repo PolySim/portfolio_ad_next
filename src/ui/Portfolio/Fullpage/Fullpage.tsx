@@ -1,10 +1,10 @@
-import { ImageType } from "@/app/portfolio/[pageId]/page";
 import FullPageContainer from "@/ui/Portfolio/Fullpage/FullpageContainer";
 import React from "react";
 import FullImage from "@/ui/Portfolio/Fullpage/FullImage";
 import FullArticle from "@/ui/Portfolio/Fullpage/FullArticle";
-import { getImages } from "@/serveurActions/images";
-import { getPageInformation } from "@/serveurActions/page";
+import { getImages } from "@/actions/images";
+import { getPageInformation } from "@/actions/page";
+import { ImageType } from "@/model/image.model";
 
 const FullPage = async ({ pageId }: { pageId: string }) => {
   const [information, images] = await Promise.all([
