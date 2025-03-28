@@ -13,8 +13,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
-        disallow: ["/admin/", "api.", "http://"],
+        allow: "/*",
+        disallow: ["/admin/*", "api.*"],
       },
     ],
     sitemap: `${process.env.APP_URL}/sitemap.xml`,
