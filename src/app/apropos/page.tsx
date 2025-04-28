@@ -25,13 +25,17 @@ export default async function AboutPage() {
           Biographie (fr)
         </h1>
         <p className="text-xs font-medium text-gray-600 mt-3 md:mt-5 leading-5">
-          {biography?.fr}
+          {biography?.fr
+            .split("\n")
+            .map((line, index) => <p key={index}>{line}</p>)}
         </p>
         <h4 className="mt-6 text-lg md:text-2xl font-semibold">
           Biography (en)
         </h4>
         <p className="text-xs font-medium text-gray-600 mt-3 leading-5">
-          {biography?.en}
+          {biography?.en
+            .split("\n")
+            .map((line, index) => <p key={index}>{line}</p>)}
         </p>
       </div>
     </div>
